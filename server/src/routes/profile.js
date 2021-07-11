@@ -1,11 +1,12 @@
-const KoaRouter = require('koa-router');
+import KoaRouter from 'koa-router';
+import handler from '../handlers/index.js';
+import middlewares from '../middlewares/index.js';
 
-const { fetchUserProfile, updateProfile } = require('../controllers');
-const { validateToken } = require('../middlewares');
+const router = new KoaRouter({
+  prefix: '/api/v1/profile',
+});
 
-const router = new KoaRouter();
+router.get('/', middlewares.isAuthenticated, handler.addRestaurant);
+router.put('/:id', middlewares.isAuthenticated, handler.getAllRestaurants);
 
-router.get('/profile', validateToken, fetchUserProfile);
-router.put('/profile/:id', validateToken, updateProfile);
-
-module.exports = router;
+export default router;

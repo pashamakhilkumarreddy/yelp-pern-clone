@@ -1,10 +1,11 @@
-const KoaRouter = require('koa-router');
+import KoaRouter from 'koa-router';
+import handler from '../handlers/index.js';
 
-const { login, register } = require('../controllers');
+const router = new KoaRouter({
+  prefix: '/api/v1/auth',
+});
 
-const router = new KoaRouter();
+router.post('/register', handler.register);
+router.post('/login', handler.login);
 
-router.post('/register', register);
-router.post('/login', login);
-
-module.exports = router;
+export default router;

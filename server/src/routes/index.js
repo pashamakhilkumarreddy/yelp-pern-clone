@@ -1,12 +1,14 @@
-const auth = require('./auth');
-const restaurants = require('./restaurants');
-const profile = require('./profile');
+import auth from './auth.js';
+import profile from './profile.js';
+import restaurant from './restaurant.js';
 
-module.exports = ({ app }) => {
+const routes = ({ app }) => {
   app.use(auth.routes());
   app.use(auth.allowedMethods());
-  app.use(restaurants.routes());
-  app.use(restaurants.allowedMethods());
   app.use(profile.routes());
   app.use(profile.allowedMethods());
+  app.use(restaurant.routes());
+  app.use(restaurant.allowedMethods());
 };
+
+export default routes;

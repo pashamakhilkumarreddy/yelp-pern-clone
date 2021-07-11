@@ -1,5 +1,5 @@
-const authorization = require('./authorization');
+import * as authMiddleware from './authorization.js';
 
-module.exports = {
-  ...authorization,
+export default {
+  ...authMiddleware,
 };
