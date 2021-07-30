@@ -1,6 +1,6 @@
 import auth from './auth.js';
 import profile from './profile.js';
-import restaurant from './restaurant.js';
+import restaurant from './restaurants.js';
 
 const routes = ({ app }) => {
   app.use(auth.routes());

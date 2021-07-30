@@ -1,5 +1,5 @@
 const database = {
-  DB_RESEARCH: 'research',
+  DB_RESEARCH: "research",
 };
 
 const constants = {
@@ -7,8 +7,8 @@ const constants = {
     ...database,
   },
   DB_TABLES: {
-    TBL_USERS: `${database.DB_RESEARCH}.users`,
-    TBL_RESTAURANTS: `${database.DB_RESEARCH}.restaurants`,
+    TBL_USERS: `users`,
+    TBL_RESTAURANTS: `restaurants`,
   },
 };
 

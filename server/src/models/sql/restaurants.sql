@@ -5,6 +5,7 @@
 
 CREATE TABLE restaurants (
   id BIGSERIAL NOT NULL PRIMARY KEY,
+  restaurant_id VARCHAR(250) NOT NULL,
   name VARCHAR(250) NOT NULL,
   location VARCHAR(250) NOT NULL,
   price_range INT NOT NULL check(price_range >= 1 && price_range <=5),

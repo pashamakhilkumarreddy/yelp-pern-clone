@@ -6,9 +6,9 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import SEORoute from "../components/SEORoute";
 import Home from "../pages/Home";
 
-const PageNotFound = lazy(() => import("../pages/PageNotFound"));
-const Login = lazy(() => import("../pages/Login"));
 const Register = lazy(() => import("../pages/Register"));
+const Login = lazy(() => import("../pages/Login"));
+const PageNotFound = lazy(() => import("../pages/PageNotFound"));
 
 const Routes = () => (
   <ErrorBoundary fallback={<Error />}>
@@ -29,9 +29,12 @@ const Routes = () => (
           exact
           render={() => <SEORoute component={Register} title={"Register"} />}
         />
-        <Route path="*">
-          <PageNotFound />
-        </Route>
+        <Route
+          path="*"
+          render={() => (
+            <SEORoute component={PageNotFound} title={"PageNotFound"} />
+          )}
+        />
       </Switch>
     </Suspense>
   </ErrorBoundary>

@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
 import App from "./App";
-import store from "./store";
+import { store, persistor } from "./store";
 import reportWebVitals from "./reportWebVitals";
 import "../node_modules/bulma/css/bulma.min.css";
 import "./index.css";
@@ -12,11 +13,13 @@ import "./index.css";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HelmetProvider>
-        <Router>
-          <App />
-        </Router>
-      </HelmetProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <HelmetProvider>
+          <Router>
+            <App />
+          </Router>
+        </HelmetProvider>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -16,6 +16,14 @@ const Header = () => {
   const [display, setDisplay] = useState(false);
   const styles = useStyles();
   const { isLoggedIn } = useSelector((state) => state.user);
+
+  const handleLogout = () => {
+    try {
+      localStorage.clear();
+    } catch (err) {
+      console.error(err);
+    }
+  };
   return (
     <header className={styles.header}>
       <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -52,7 +60,11 @@ const Header = () => {
             <div className="navbar-item pr-5">
               <div className="buttons">
                 {isLoggedIn ? (
-                  <button type="button" className="button is-light is-danger">
+                  <button
+                    type="button"
+                    className="button is-light is-danger"
+                    onClick={handleLogout}
+                  >
                     Log Out
                   </button>
                 ) : (

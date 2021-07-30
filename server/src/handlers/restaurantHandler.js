@@ -6,7 +6,7 @@ export default {
   async addRestaurant(ctx) {
     try {
       const { name, location } = ctx.request.body;
-      const params = [name, location];
+      const params = ['', name, location, 3];
       const restaurant = await restaurantModel.addNewRestaurant(params);
       ctx.response.status = 200;
       ctx.body = {
@@ -30,7 +30,7 @@ export default {
   async getAllRestaurants(ctx) {
     try {
       const { limit = 10, skip = 0 } = ctx.request.query;
-      const params = [limit, skip];
+      const params = [skip, limit];
       const restaurants = await restaurantModel.getAllRestaurants(params);
       ctx.response.status = 200;
       ctx.body = {
@@ -55,7 +55,7 @@ export default {
     try {
       const id = ctx.request.params;
       const params = [id];
-      const restaurant = await restaurantModel.getRestaurant(params);
+      const restaurant = await restaurantModel.getRestaurantDetails(params);
       ctx.response.status = 200;
       ctx.body = {
         success: true,

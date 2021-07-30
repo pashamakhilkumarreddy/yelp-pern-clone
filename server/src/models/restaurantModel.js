@@ -1,5 +1,5 @@
-import constants from '../utils/constants/index.js';
-import BaseModel from './baseModel.js';
+import constants from "../utils/constants/index.js";
+import BaseModel from "./baseModel.js";
 
 /**
  * Class representing a restaurant model
@@ -24,8 +24,8 @@ class RestaurantModel extends BaseModel {
     try {
       const conn = await this._initDbConnectionPool();
       const { rows } = await conn.query(
-        `INSERT INTO ${this._table} VALUES (?, ?, ?, ?, ?)`,
-        params,
+        `INSERT INTO ${this._table} (restaurant_id, name, location, price_range) VALUES ($1, $2, $3, $4)`,
+        params
       );
       return rows;
     } catch (err) {
@@ -39,11 +39,12 @@ class RestaurantModel extends BaseModel {
    * @param {*} params
    * @returns All restaurants
    */
-  async getAllRestaurants() {
+  async getAllRestaurants(params) {
     const conn = await this._initDbConnectionPool();
     try {
       const { rows } = await conn.query(
-        `SELECT * FROM restaurants`, // eslint-disable-line 
+        `SELECT * FROM ${this._table} OFFSET $1 LIMIT $2`,
+        params
       );
       console.info(rows);
       return rows;
@@ -60,12 +61,12 @@ class RestaurantModel extends BaseModel {
    * @param {*} params
    * @returns Restaurant Data
    */
-  async getRestaurant(params) {
+  async getRestaurantDetails(params) {
     try {
       const conn = await this._initDbConnectionPool();
       const { rows } = await conn.query(
-        `SELECT * ${this._table} WHERE id = ?`,
-        params,
+        `SELECT * ${this._table} WHERE id = $1`,
+        params
       );
       return rows;
     } catch (err) {
@@ -83,8 +84,8 @@ class RestaurantModel extends BaseModel {
     try {
       const conn = await this._initDbConnectionPool();
       const { rows } = await conn.query(
-        `UPDATE ${this._table} WHERE id = ?`,
-        params,
+        `UPDATE ${this._table} SET name = $1 location = $2 price_range = $3 WHERE id = $4`,
+        params
       );
       return rows;
     } catch (err) {
@@ -102,8 +103,8 @@ class RestaurantModel extends BaseModel {
     try {
       const conn = await this._initDbConnectionPool();
       const { rows } = await conn.query(
-        `DELETE FROM ${this._table} WHERE id ? `,
-        params,
+        `DELETE FROM ${this._table} WHERE id = $1`,
+        params
       );
       return rows;
     } catch (err) {

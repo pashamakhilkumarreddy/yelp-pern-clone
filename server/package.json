@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint src/ --ext .js, --ext .json",
     "lint:fix": "eslint src/ --ext .js, --ext .json --fix",
-    "start": "env-cmd --environments development --no-override nodemon src/app.js --exec \"npm run lint && node \"",
+    "start": "env-cmd --environments development --no-override nodemon src/app.js --exec \"node \"",
     "dev": "env-cmd --environments development --no-override node src/app.js",
     "staging": "env-cmd --environments staging --no-override pm2 src/app.js",
     "acceptance": "env-cmd --environments acceptance --no-override pm2 src/app.js",
@@ -17,7 +17,9 @@
   "author": "Akhil Kumar Reddy Pasham",
   "license": "MIT",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "env-cmd": "^10.1.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.1",
     "koa-body": "^4.2.0",
     "koa-compress": "^5.0.1",

@@ -24,7 +24,7 @@ class UserModel extends BaseModel {
     try {
       const conn = await this._initDbConnectionPool();
       const { rows } = await conn.query(
-        `INSERT INTO ${this._table} VALUES (?, ?, ?, ?, ?)`,
+        `INSERT INTO ${this._table} (username, email, password) VALUES ($1, $2, $3, $4, $5)`,
         params,
       );
       return rows;
@@ -43,7 +43,7 @@ class UserModel extends BaseModel {
     try {
       const conn = await this._initDbConnectionPool();
       const { rows } = await conn.query(
-        `SELECT * FROM ${this._table} WHERE id ?`,
+        `SELECT * FROM ${this._table} WHERE id = $1`,
         params,
       );
       return rows;
@@ -62,7 +62,7 @@ class UserModel extends BaseModel {
     try {
       const conn = await this._initDbConnectionPool();
       const { rows } = await conn.query(
-        `UPDATE ${this._table} WHERE id ? `,
+        `UPDATE ${this._table} WHERE id = $1 `,
         params,
       );
       return rows;
